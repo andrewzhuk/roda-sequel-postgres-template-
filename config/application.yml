@@ -1,0 +1,20 @@
+
+base: &base
+  network: <%= ENV['NETWORK'] || 'main' %>
+  redis_url: <%= ENV['REDIS_DATABASE_URL'] || 'redis://127.0.0.1:6379/0' %>
+  watch_tickers: <%= ENV['WATCH_TICKERS'] || 'btc,ltc,eth,xem,bch,fund' %>
+  convert_to: <%= ENV['CONVERT_TO'] || 'usd,btc,rub,uah' %>
+development:
+  <<: *base
+  database_url: <%= ENV['DATABASE_URL'] || 'postgres://andrewzhuk@127.0.0.1:5432/application_development' %>
+  log_level: <%= ENV['LOG_LEVEL'] || 'debug' %>
+test:
+  <<: *base
+  database_url: <%= ENV['DATABASE_URL'] || 'postgres://postgres@127.0.0.1:5432/application_test' %>
+  log_level: <%= ENV['LOG_LEVEL'] || 'info' %>
+  redis_url: <%= ENV['REDIS_URL'] || 'redis://127.0.0.1:6379/1' %>
+
+production:
+  <<: *base
+  database_url: <%= ENV['DATABASE_URL'] || 'postgres://postgres@127.0.0.1:5432/application_production' %>
+  log_level: <%= ENV['LOG_LEVEL'] || 'production' %>

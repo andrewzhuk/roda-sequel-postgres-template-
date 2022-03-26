@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+  app: &app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: curl -sS http://127.0.0.1:5000 || echo 1
+      interval: 5s
+      timeout: 10s
+      retries: 3
+    container_name: application-app
+    command: bundle exec puma
+    ports:
+      - "5000:5000"
+    restart: always
+    env_file: .env.production
+    environment:
+      COMMUNITY_ENV: production #development
+  redis:
+    container_name: application-redis
+    image: "redis:6.0-alpine"
+    ports:
+      - "6379:6379"
+    restart: always
+    healthcheck:
+      test: redis-cli ping
+volumes:
+  gem_cache:
+  db_data:

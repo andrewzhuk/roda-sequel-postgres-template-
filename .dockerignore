@@ -1,0 +1,6 @@
+.git
+.bundle
+.env
+.env.*
+.DS_Store
+*~

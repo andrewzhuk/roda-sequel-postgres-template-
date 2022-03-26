@@ -1,0 +1,20 @@
+.DS_Store
+/*.dump
+/*.log
+logfile
+outputfile
+/.bundle
+/.env
+/.ruby-version
+#/config/application.yml
+/docs/build
+/log
+/tmp
+# old files for dev backups
+*._old
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
